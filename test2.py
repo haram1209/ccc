@@ -4,7 +4,7 @@ import pyperclip
 import time
 
 subprocess.Popen([
-    'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     # '--user-data-dir=' + 'C:\\Users\\hanju\\AppData\\Local\\Google\\Chrome\\2222',
     # '--user-agent=' + mobile_user_agent,  # 모바일 사용자 에이전트 적용
     # '--window-size=1000,1000',  # iPhone 6/7/8 크기
