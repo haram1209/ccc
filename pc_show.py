@@ -35,7 +35,7 @@ with open(file_path, 'r', encoding='utf-8') as file:
         else:
             products[key] = [value]  # 하나의 상품명도 리스트로 저장
 
-# chrome --user-data-dir="C:\Users\hanju\AppData\Local\Google\Chrome\1111"
+# chrome --user-data-dir="C:\Users\hanju\AppData\Local\Google\Chrome\1111" 333
 vpn = {
 
     "jjun042204": "jjun042204",
