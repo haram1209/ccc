@@ -62,7 +62,7 @@ with open(file_path, 'r', encoding='utf-8') as file:
         key, value = line.strip().split(':')
         vpn[key.strip()] = value.strip()  # 키와 값에 공백이 있을 수 있으므로 제거
 
-username = "95s6199"
+username = "956a7234"
 password = "1234"
 
 num_products_per_vpn = 30  # 각 VPN 당 처리할 상품 수
