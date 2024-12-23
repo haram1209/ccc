@@ -35,7 +35,7 @@ with open(file_path, 'r', encoding='utf-8') as file:
         else:
             products[key] = [value]  # 하나의 상품명도 리스트로 저장
 
-# chrome --user-data-dir="C:\Users\hanju\AppData\Local\Google\Chrome\1111" 333
+# chrome --user-data-dir="C:\Users\hanju\AppData\Local\Google\Chrome\leejakka23"
 vpn = {
 
     "jjun042204": "111",
@@ -46,8 +46,8 @@ vpn = {
     "glckhj": "666",
     "humming_box": "777",
     "seokhwan81": "888",
-    "jangasd112": "999",
-    "leejakka23": "101010",
+    "leejakka23": "999",
+    "jangasd112": "101010",
     # "ddvrof": "lii02iil"
 }
 # whale --user-data-dir="C:\Users\hanju\AppData\Local\Naver\Naver Whale\seokhwan81"
@@ -134,17 +134,40 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
                 random_nm = random.choice(prod_nms)
                 if isinstance(prod_ids, str):
                     prod_ids = (prod_ids,)  # prod_ids가 문자열인지 튜플인지 확인 문자열을 튜플로 변환
+
                 # 상품명 검색
+                # 상품명 검색1 검색창 포커스
                 search = f"""
-                const searchBox = document.querySelector('input._searchInput_search_text_83jy9');
+                const searchBox = document.querySelector('input#input_text');
                 if (searchBox) {{
                     searchBox.click();
-                    searchBox.value = '{random_nm}'; 
-                    const searchButton = document.querySelector('button._searchInput_button_search_wu9xq');
-                    if (searchButton) {{
-                        searchButton.click();
-                    }}
                 }}"""
+
+                pyperclip.copy(search)  # 클립보드에 JavaScript 코드 복사
+                pyautogui.hotkey('ctrl', 'v')  # 붙여넣기
+                pyautogui.press('enter')  # Enter 키를 눌러 실행
+                time.sleep(2)  # 검색 결과 로드 대기
+
+                # 상품명 검색2 상품명 입력
+                search = f"""
+                const searchBox = document.querySelector('input#input_text');
+                if (searchBox) {{
+                    searchBox.click();
+                    searchBox.value = '{random_nm}';  
+                    searchBox.dispatchEvent(new Event('input', {{bubbles: true }}));
+                }}"""
+
+                pyperclip.copy(search)  # 클립보드에 JavaScript 코드 복사
+                pyautogui.hotkey('ctrl', 'v')  # 붙여넣기
+                pyautogui.press('enter')  # Enter 키를 눌러 실행
+                time.sleep(2)  # 검색 결과 로드 대기
+
+                # 상품명 검색3
+                search = f"""
+                const searchButton = document.querySelector('button._searchInput_button_search_pA3ap');
+                if (searchButton) {{
+                    searchButton.click();
+                                }}"""
 
                 pyperclip.copy(search)  # 클립보드에 JavaScript 코드 복사
                 pyautogui.hotkey('ctrl', 'v')  # 붙여넣기
@@ -232,7 +255,7 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
                         check2 = f"""
                             const productElement = document.querySelector('a[data-i="{prod_ids[1]}"]');
                             let message;
-                
+
                             if (productElement) {{
                                 message = 'true2';
                             }} else {{
