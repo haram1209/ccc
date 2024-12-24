@@ -20,30 +20,30 @@ with open(file_path, 'r', encoding='utf-8') as file:
         else:
             products[key] = [value]
 
-vpn = {
-    "jjun042204": "1",
-    "hotkyj": "2",
-    "jjy5627": "3",
-    "onirac1104": "4",
-    "shinski": "5",
-    "glckhj": "6",
-    "humming_box": "7",
-    "seokhwan81": "8",
-    "jangasd112": "9",
-    "leejakka23": "10",
-    "ddvrof": "11"
-}
+# vpn = {
+#     "jjun042204": "1",
+#     "hotkyj": "2",
+#     "jjy5627": "3",
+#     "onirac1104": "4",
+#     "shinski": "5",
+#     "glckhj": "6",
+#     "humming_box": "7",
+#     "seokhwan81": "8",
+#     "jangasd112": "9",
+#     "leejakka23": "10",
+#     "ddvrof": "11"
+# }
 # chrome --user-data-dir="C:\Users\hanju\AppData\Local\Google\Chrome\1111"
 # whale --user-data-dir="C:\Users\hanju\AppData\Local\Naver\Naver Whale\seokhwan81"
 # msedge --user-data-dir="C:\\Users\\hanju\\AppData\\Local\\Microsoft\\Edge\\11"
 
-# vpn = {}
-# file_path = 'C:\\sellylist\\vpn_list.txt'
-#
-# with open(file_path, 'r', encoding='utf-8') as file:
-#     for line in file:
-#         key, value = line.strip().split(':')
-#         vpn[key.strip()] = value.strip()
+vpn = {}
+file_path = 'C:\\sellylist\\vpn_list.txt'
+
+with open(file_path, 'r', encoding='utf-8') as file:
+    for line in file:
+        key, value = line.strip().split(':')
+        vpn[key.strip()] = value.strip()
 
 username = "95s6199"
 password = "1234"
@@ -82,7 +82,7 @@ for vpn_key, profile in vpn.items():
             time.sleep(10)  # 대기 후 재시도
 
     if connected:
-        profile_path = f'C:\\Users\\hanju\\AppData\\Local\\Google\\Chrome\\{profile}'  # 크롬
+        profile_path = f'C:\\Users\\pc\\AppData\\Local\\Google\\Chrome\\{profile}'  # 크롬
         # profile_path = f'C:\\Users\\pc\\AppData\\Local\\Naver\\Naver Whale\\{profile}'  # 웨일
         # profile_path = f'C:\\Users\\pc\\AppData\\Local\\Microsoft\\Edge\\{profile}'  # 엣지 엣지일 경우 개발자도구 포커스 맞추기 켜야함
         subprocess.Popen([
