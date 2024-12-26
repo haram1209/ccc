@@ -36,31 +36,31 @@ with open(file_path, 'r', encoding='utf-8') as file:
             products[key] = [value]  # 하나의 상품명도 리스트로 저장
 
 # chrome --user-data-dir="C:\Users\hanju\AppData\Local\Google\Chrome\1111" 333
-vpn = {
-
-    "jjun042204": "111",
-    "hotkyj": "222",
-    "jjy5627": "333",
-    "onirac1104": "444",
-    "shinski": "555",  # 08:40 나옴
-    "glckhj": "666",
-    "humming_box": "777",
-    "seokhwan81": "888",
-    "jangasd112": "999",
-    "leejakka23": "101010",
-    # "ddvrof": "lii02iil"
-}
+# vpn = {
+#
+#     "jjun042204": "111",
+#     "hotkyj": "222",
+#     "jjy5627": "333",
+#     "onirac1104": "444",
+#     "shinski": "555",  # 08:40 나옴
+#     "glckhj": "666",
+#     "humming_box": "777",
+#     "seokhwan81": "888",
+#     "jangasd112": "999",
+#     "leejakka23": "101010",
+#     # "ddvrof": "lii02iil"
+# }
 # whale --user-data-dir="C:\Users\hanju\AppData\Local\Naver\Naver Whale\seokhwan81"
 # msedge --user-data-dir="C:\\Users\\hanju\\AppData\\Local\\Microsoft\\Edge\\11"
 
-# vpn = {}
-# file_path = 'C:\\sellylist\\vpn_list.txt'  # VPN 정보를 저장한 텍스트 파일의 경로
-#
-# with open(file_path, 'r', encoding='utf-8') as file:
-#     for line in file:
-#         # 줄을 ':'로 나누어 키와 값을 분리
-#         key, value = line.strip().split(':')
-#         vpn[key.strip()] = value.strip()  # 키와 값에 공백이 있을 수 있으므로 제거
+vpn = {}
+file_path = 'C:\\sellylist\\vpn_list.txt'  # VPN 정보를 저장한 텍스트 파일의 경로
+
+with open(file_path, 'r', encoding='utf-8') as file:
+    for line in file:
+        # 줄을 ':'로 나누어 키와 값을 분리
+        key, value = line.strip().split(':')
+        vpn[key.strip()] = value.strip()  # 키와 값에 공백이 있을 수 있으므로 제거
 
 username = "95s6199"
 password = "1234"
