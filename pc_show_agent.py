@@ -90,7 +90,7 @@ for vpn_key, profile in vpn.items():
             # 'C:\\Program Files\\Naver\\Naver Whale\\Application\\Whale.exe',  # 웨일
             # 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',  # 엣지 엣지일 경우 개발자도구 포커스 맞추기 켜야함
             '--user-data-dir=' + profile_path,
-            '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
+            '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
             # '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Whale/3.28.266.14 Safari/537.36',
             'https://search.shopping.naver.com/home'
         ])
