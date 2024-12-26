@@ -99,7 +99,7 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
                 time.sleep(10)  # 대기 후 재시도
 
         if connected:
-            profile_path = f'C:\\Users\\hanju\\AppData\\Local\\Google\\Chrome\\{profile}'  # 크롬
+            profile_path = f'C:\\Users\\pc\\AppData\\Local\\Google\\Chrome\\{profile}'  # 크롬
             # profile_path = f'C:\\Users\\hanju\\AppData\\Local\\Naver\\Naver Whale\\{profile}'  # 웨일
             # profile_path = f'C:\\Users\\hanju\\AppData\\Local\\Microsoft\\Edge\\{profile}'  # 엣지 엣지일 경우 개발자도구 포커스 맞추기 켜야함
             subprocess.Popen([
