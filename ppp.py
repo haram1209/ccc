@@ -83,14 +83,19 @@ for vpn_key in vpn.keys():
 
             # JavaScript 코드 붙여넣기
             js_code = "copy(document.cookie);"
-            pyperclip.copy(js_code)  # 클립보드에 JavaScript 코드 복사
-            pyautogui.hotkey('ctrl', 'v')  # 붙여 넣기
+            pyautogui.typewrite(js_code, interval=0.1)  # 코드 입력 (interval 추가)
             pyautogui.press('enter')  # Enter 키를 눌러 실행
             time.sleep(2)  # 검사 후 대기
-            # 클립보드에서 메시지 읽기
-            cookies = pyperclip.paste()
-            print("추출한 쿠키:")
-            print(cookies)
+            # 클립보드에서 쿠키 읽기
+            try:
+                cookies = pyperclip.paste()
+                if cookies:
+                    print("추출한 쿠키:")
+                    print(cookies)
+                else:
+                    print("쿠키를 수집할 수 없습니다. 클립보드가 비어 있습니다.")
+            except Exception as e:
+                print(f"클립보드 접근 중 오류 발생: {e}")
 
             # 크롬 종료 (출력 억제)
             subprocess.run("taskkill /F /IM chrome.exe", shell=True, stdout=subprocess.DEVNULL,
