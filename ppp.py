@@ -88,8 +88,6 @@ for vpn_key in vpn.keys():
             time.sleep(1)  # 코드 실행 대기
 
             # 로그 복사
-            pyautogui.hotkey('ctrl', 'l')  # 콘솔 클리어
-            time.sleep(0.5)
             pyautogui.hotkey('ctrl', 'c')  # 클립보드에 복사
             time.sleep(1)  # 복사 대기
 
