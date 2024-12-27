@@ -150,7 +150,7 @@ for _ in range(args.x):
 
             # 브라우저 실행
             subprocess.Popen(command)
-            time.sleep(100)
+            time.sleep(1)
 
             pyautogui.hotkey('ctrl', 'shift', 'j')  # 개발자도구 켜기
             time.sleep(0.2)
