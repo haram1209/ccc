@@ -74,8 +74,9 @@ vpn_id = {
     "2": "56a7234",
 }
 
-# 입력된 name 값 출력
+# 입력된 name 값과 vpn_id 출력
 print(f"입력된 name: {args.name}")
+print(f"VPN ID 딕셔너리: {vpn_id}")
 
 # name 값으로 username 설정
 username = vpn_id.get(args.name)
