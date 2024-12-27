@@ -79,14 +79,8 @@ print(f"입력된 name: {args.name}")
 print(f"VPN ID 딕셔너리: {vpn_id}")
 
 # name 값으로 username 설정
-username = vpn_id.get(args.name)
-
-# username이 제대로 가져와졌는지 확인
-if username is None:
-    print(f"오류: 유효하지 않은 이름 '{args.name}'입니다. (1-20 범위의 계정 ID를 제공하세요.)")
-else:
-    password = "1234"
-    print(f"사용할 사용자 이름: {username}")
+username = vpn_id.get(args.name.strip(','))
+password = "1234"
 
 num_products_per_vpn = 30  # 각 VPN 당 처리할 상품 수
 total_products = len(products)
