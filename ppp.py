@@ -20,7 +20,7 @@ with open(file_path, 'r', encoding='utf-8') as file:
 
 # VPN 이름과 프로필 폴더명 설정
 vpn_names = [str(i) for i in range(1, 12)]  # 1~11
-chrome_profile_base_path = 'C:\\Users\\your_username\\AppData\\Local\\Google\\Chrome\\'  # 기본 프로필 경로
+chrome_profile_base_path = 'C:\\Users\\pc\\AppData\\Local\\Google\\Chrome\\'  # 기본 프로필 경로
 profile_source_folder = 'XX'  # 복사할 원본 프로필 폴더 이름
 
 # 각 VPN에 대해 처리
@@ -43,6 +43,11 @@ for vpn_key in vpn_names:
         # 프로필 폴더 복사
         source_path = os.path.join(chrome_profile_base_path, profile_source_folder)
         destination_path = os.path.join(chrome_profile_base_path, vpn_key)
+
+        # 프로필 폴더가 존재하는지 확인
+        if not os.path.exists(source_path):
+            print(f"원본 프로필 폴더가 존재하지 않습니다: {source_path}")
+            continue  # 루프를 계속 진행
 
         # 기존 프로필 폴더가 있으면 삭제
         if os.path.exists(destination_path):
