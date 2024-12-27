@@ -41,7 +41,7 @@ for vpn_key in vpn.keys():
         # 크롬 실행
         command = [
             'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-            f'--user-data-dir={chrome_profile_base_path}',
+            f'--user-data-dir={destination_path}',
             'https://daum.net'  # 실행할 URL
         ]
         subprocess.Popen(command)
