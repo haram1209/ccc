@@ -66,7 +66,7 @@ with open(file_path, 'r', encoding='utf-8') as file:
 # 명령줄 인자 처리
 parser = argparse.ArgumentParser(description="VPN 연결 스크립트")
 parser.add_argument("--name", required=True, help="사용할 계정을 지정 (1~20)")
-parser.add_argument("--agent", required=True, type=int, help="사용할 user-agent를 지정 (0은 user-agent 미사용)")
+parser.add_argument("--agent", required=True, help="사용할 user-agent를 지정 (0은 user-agent 미사용)")
 args = parser.parse_args()
 
 vpn_id = {
@@ -75,8 +75,8 @@ vpn_id = {
 }
 
 user_agents = {
-    130: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
-    128: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+    "130": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+    "128": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
 }
 
 # name 값으로 username 설정
