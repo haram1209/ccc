@@ -74,11 +74,6 @@ vpn_id = {
     "2": "56a7234",
 }
 
-user_agents = {
-    "130": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
-    "128": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
-}
-
 # name 값으로 username 설정
 username = vpn_id.get(args.name)
 # if not username:
@@ -120,6 +115,10 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
 
         if connected:
             # agent 값 검증 및 설정
+            user_agents = {
+                "130": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+                "128": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+            }
             if args.agent not in range(0, 200):
                 raise ValueError("지원되지 않는 agent 값입니다. 0~200 사이의 정수를 입력하세요.")
 
