@@ -63,7 +63,13 @@ with open(file_path, 'r', encoding='utf-8') as file:
         key, value = line.strip().split(':')
         vpn[key.strip()] = value.strip()  # 키와 값에 공백이 있을 수 있으므로 제거
 
-username_map = {
+# 명령줄 인자 처리
+parser = argparse.ArgumentParser(description="VPN 연결 스크립트")
+parser.add_argument("--name", required=True, type=int, help="사용할 계정을 지정 (1~20)")
+parser.add_argument("--agent", required=True, type=int, help="사용할 user-agent를 지정 (0은 user-agent 미사용)")
+args = parser.parse_args()
+
+username = {
     1: "95s6199",  # 맨처음구입 로컬에서 돌리던 11개
     2: "56a7234",
 }
@@ -73,14 +79,8 @@ user_agents = {
     128: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
 }
 
-# 명령줄 인자 처리
-parser = argparse.ArgumentParser(description="VPN 연결 스크립트")
-parser.add_argument("--name", required=True, type=int, help="사용할 계정을 지정 (1~20)")
-parser.add_argument("--agent", required=True, type=int, help="사용할 user-agent를 지정 (0은 user-agent 미사용)")
-args = parser.parse_args()
-
 # name 값으로 username 설정
-username = username_map.get(args.name)
+username = username.get(args.name)
 if not username:
     raise ValueError("설정하지 않은 vpn입니다.")
 password = "1234"
