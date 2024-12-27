@@ -2,7 +2,6 @@ import os
 import shutil
 import subprocess
 import time
-import argparse
 
 # VPN 정보 로드
 vpn = {}
@@ -43,7 +42,6 @@ for vpn_key in vpn.keys():
         command = [
             'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
             f'--user-data-dir={chrome_profile_base_path}',
-            f'--profile-directory={vpn_key}',
             'https://daum.net'  # 실행할 URL
         ]
         subprocess.Popen(command)
@@ -52,6 +50,10 @@ for vpn_key in vpn.keys():
         time.sleep(5)
         # 크롬 종료
         os.system("taskkill /F /IM chrome.exe")
+
+        # VPN 연결 종료
+        print(f"{vpn_key} 연결 종료 중...")
+        subprocess.run(f'rasdial "{vpn_key}" /disconnect', shell=True)
 
     else:
         print(f"{vpn_key} 연결 실패: {result.stderr.strip()}")
