@@ -36,8 +36,10 @@ for vpn_key in vpn.keys():
         # 기존 프로필 폴더가 있으면 삭제
         if os.path.exists(destination_path):
             shutil.rmtree(destination_path)
+            print("기존프로필 삭제완료")
+            time.sleep(1)
 
-        # 폴더 복사
+            # 폴더 복사
         shutil.copytree(source_path, destination_path)
         print(f"{profile_source_folder}에서 {vpn_key}로 프로필 복사 완료.")
         time.sleep(1)  # 복사 후 대기
