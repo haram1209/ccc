@@ -65,8 +65,9 @@ with open(file_path, 'r', encoding='utf-8') as file:
 
 # 명령줄 인자 처리
 parser = argparse.ArgumentParser(description="VPN 연결 스크립트")
-parser.add_argument("--name", required=True, help="사용할 계정을 지정 (1~20)")
-parser.add_argument("--agent", required=True, help="사용할 user-agent를 지정 (0은 user-agent 미사용)")
+parser.add_argument("--v", required=True, help="사용할 계정을 지정 (1~20)")
+parser.add_argument("--a", required=True, help="사용할 user-agent를 지정 (0은 user-agent 미사용)")
+parser.add_argument("--x", type=int, default=1, help="루프 반복 횟수 (기본값: 1)")
 args = parser.parse_args()
 
 vpn_id = {
@@ -74,7 +75,7 @@ vpn_id = {
     "2": "56a7234",
 }
 
-username = vpn_id.get(args.name.strip(','))
+username = vpn_id.get(args.v.strip(','))
 password = "1234"
 
 num_products_per_vpn = 30  # 각 VPN 당 처리할 상품 수
@@ -82,7 +83,7 @@ total_products = len(products)
 product_ids = list(products.keys())  # 상품 ID 리스트
 current_index = 0  # 상품 인덱스 초기화
 
-while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 할것
+for _ in range(args.x):
     for vpn_key, profile in vpn.items():
         attempts = 0  # 시도 횟수
         max_attempts = 2  # 최대 재시도 횟수
@@ -114,10 +115,15 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
             # agent 값 검증 및 설정
             user_agents = {
                 "130": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+                "129": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                 "128": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+                "127": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36",
+                "126": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+                "125": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+                "124": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
             }
             try:
-                agent_value = int(args.agent)
+                agent_value = int(args.a)
             except ValueError:
                 raise ValueError("agent 값은 정수여야 합니다.")
 
@@ -372,6 +378,6 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
             current_index = (current_index + num_products_per_vpn) % total_products
 
         else:
-            print(f"{vpn_key} 연결 실패. 9분 동안 대기합니다.")
-            time.sleep(1200)  # 9분 대기 후 다음 VPN으로 이동, 지금은 상품이 얼마없어서 20분 쉬도록 세팅
+            print(f"{vpn_key} 연결 실패. 11분 동안 대기합니다.")
+            time.sleep(660)  # 9분 대기 후 다음 VPN으로 이동, 지금은 상품이 얼마없어서 20분 쉬도록 세팅
             current_index = (current_index + num_products_per_vpn) % total_products
