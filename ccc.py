@@ -138,14 +138,13 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
                 '--user-data-dir=' + profile_path,  # 사용자 데이터 디렉토리
                 'https://search.shopping.naver.com/home'  # 실행할 URL
             ]
-            time.sleep(100)
             # user-agent 추가 (0이 아닌 경우에만)
             if user_agent:
                 command.insert(2, '--user-agent=' + user_agent)
 
             # 브라우저 실행
             subprocess.Popen(command)
-            time.sleep(1)
+            time.sleep(100)
 
             pyautogui.hotkey('ctrl', 'shift', 'j')  # 개발자도구 켜기
             time.sleep(0.2)
