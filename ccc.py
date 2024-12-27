@@ -74,11 +74,6 @@ vpn_id = {
     "2": "56a7234",
 }
 
-# 입력된 name 값과 vpn_id 출력
-print(f"입력된 name: {args.name}")
-print(f"VPN ID 딕셔너리: {vpn_id}")
-
-# name 값으로 username 설정
 username = vpn_id.get(args.name.strip(','))
 password = "1234"
 
@@ -121,11 +116,19 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
                 "130": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
                 "128": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
             }
-            if args.agent not in range(0, 200):
+            try:
+                agent_value = int(args.agent)
+            except ValueError:
+                raise ValueError("agent 값은 정수여야 합니다.")
+
+            # agent 값 검증
+            if agent_value not in range(0, 200):
                 raise ValueError("지원되지 않는 agent 값입니다. 0~200 사이의 정수를 입력하세요.")
 
             # user-agent 가져오기 (0이면 None)
-            user_agent = user_agents.get(args.agent) if args.agent != 0 else None
+            user_agent = user_agents.get(str(agent_value), None) if agent_value != 0 else None
+
+            print(f"사용할 User-Agent: {user_agent}")
 
             profile_path = f'C:\\Users\\pc\\AppData\\Local\\Google\\Chrome\\{profile}'  # 크롬
             # profile_path = f'C:\\Users\\hanju\\AppData\\Local\\Naver\\Naver Whale\\{profile}'  # 웨일
