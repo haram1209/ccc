@@ -121,7 +121,7 @@ while True:  # 무한 반복 사용할때는 아랫부분 전체 들여쓰기 �
         if connected:
             # agent 값 검증 및 설정
             if args.agent not in range(0, 200):
-                raise ValueError("지원되지 않는 agent 값입니다. 0~10 사이의 정수를 입력하세요.")
+                raise ValueError("지원되지 않는 agent 값입니다. 0~200 사이의 정수를 입력하세요.")
 
             # user-agent 가져오기 (0이면 None)
             user_agent = user_agents.get(args.agent) if args.agent != 0 else None
