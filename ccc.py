@@ -64,8 +64,8 @@ with open(file_path, 'r', encoding='utf-8') as file:
         vpn[key.strip()] = value.strip()  # 키와 값에 공백이 있을 수 있으므로 제거
 
 username_map = {
-    "1": "95s6199",  # 맨처음구입 로컬에서 돌리던 11개
-    "2": "56a7234",
+    1: "95s6199",  # 맨처음구입 로컬에서 돌리던 11개
+    2: "56a7234",
 }
 
 user_agents = {
@@ -75,7 +75,7 @@ user_agents = {
 
 # 명령줄 인자 처리
 parser = argparse.ArgumentParser(description="VPN 연결 스크립트")
-parser.add_argument("--name", required=True, help="사용할 계정을 지정 (1~20)")
+parser.add_argument("--name", required=True, type=int, help="사용할 계정을 지정 (1~20)")
 parser.add_argument("--agent", required=True, type=int, help="사용할 user-agent를 지정 (0은 user-agent 미사용)")
 args = parser.parse_args()
 
