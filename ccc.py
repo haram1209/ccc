@@ -69,7 +69,7 @@ parser.add_argument("--name", required=True, help="사용할 계정을 지정 (1
 parser.add_argument("--agent", required=True, type=int, help="사용할 user-agent를 지정 (0은 user-agent 미사용)")
 args = parser.parse_args()
 
-username = {
+vpn_id = {
     "1": "95s6199",  # 맨처음구입 로컬에서 돌리던 11개
     "2": "56a7234",
 }
@@ -80,9 +80,9 @@ user_agents = {
 }
 
 # name 값으로 username 설정
-username = username.get(args.name)
-if not username:
-    raise ValueError("설정하지 않은 vpn입니다.")
+username = vpn_id.get(args.name)
+# if not username:
+#     raise ValueError("설정하지 않은 vpn입니다.")
 password = "1234"
 
 num_products_per_vpn = 30  # 각 VPN 당 처리할 상품 수
