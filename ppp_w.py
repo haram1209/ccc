@@ -83,7 +83,10 @@ for vpn_key in vpn.keys():
 
             # JavaScript 코드 붙여넣기
             js_code = "copy(document.cookie);"
-            pyautogui.typewrite(js_code, interval=0.1)  # 코드 입력 (interval 추가)
+            # pyautogui.typewrite(js_code, interval=0.1)  # 코드 입력 (interval 추가)
+            pyperclip.copy(js_code)  # 클립보드에 JavaScript 코드 복사
+            pyautogui.hotkey('ctrl', 'v')  # 붙여넣기
+            time.sleep(1)
             pyautogui.press('enter')  # Enter 키를 눌러 실행
             time.sleep(2)  # 검사 후 대기
             # 클립보드에서 쿠키 읽기
