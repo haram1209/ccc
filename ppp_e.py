@@ -70,7 +70,7 @@ for vpn_key in vpn.keys():
 
             # 엣지실행
             command = [
-                'msedge',
+                'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
                 f'--user-data-dir={destination_path}',  # 복사한 프로필 경로 사용
                 'https://naver.com'  # 실행할 URL
             ]
