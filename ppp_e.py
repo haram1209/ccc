@@ -70,7 +70,7 @@ for vpn_key in vpn.keys():
 
             # 엣지실행
             command = [
-                'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',
+                'msedge',
                 f'--user-data-dir={destination_path}',  # 복사한 프로필 경로 사용
                 'https://naver.com'  # 실행할 URL
             ]
@@ -100,8 +100,8 @@ for vpn_key in vpn.keys():
             except Exception as e:
                 print(f"클립보드 접근 중 오류 발생: {e}")
 
-            # 웨일 종료 (출력 억제)
-            subprocess.run("taskkill /F /IM whale.exe", shell=True, stdout=subprocess.DEVNULL,
+            # 엣지 종료 (출력 억제)
+            subprocess.run("taskkill /F /IM msedge.exe", shell=True, stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
             print(f"{vpn_key} 엣지 종료완료")
             time.sleep(1)  # 종료 후 대기
