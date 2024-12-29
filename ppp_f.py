@@ -40,12 +40,12 @@ def get_current_ip():
 
 
 # Firefox 프로필 생성
-def create_firefox_profile(profile_name):
+def create_firefox_profile(p_name):
     command1 = [
         'C:\\Program Files\\Mozilla Firefox\\firefox.exe',
         '-no-remote',
         '-CreateProfile',
-        profile_name
+        p_name
     ]
     subprocess.run(command1)
     time.sleep(2)
