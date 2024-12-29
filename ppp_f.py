@@ -1,3 +1,5 @@
+import os
+import shutil
 import subprocess
 import time
 import pyautogui
@@ -11,10 +13,10 @@ file_path = 'C:\\sellylist\\vpn_list.txt'
 with open(file_path, 'r', encoding='utf-8') as file:
     for line in file:
         key, value = line.strip().split(':')
-        vpn[key.strip()] = value.strip()
+        vpn[key.strip()] = value.strip()  # 키와 값에 공백이 있을 수 있으므로 제거
 
 vpn_id = {
-    "1": "95s6199",
+    "1": "95s6199",  # 맨처음구입 로컬에서 돌리던 11개
     "2": "56a7234",
 }
 
@@ -26,7 +28,7 @@ args = parser.parse_args()
 username = vpn_id.get(args.v.strip(','))
 password = "1234"
 
-# Firefox의 프로필 기본 경로
+# Firefox 프로필 경로 및 원본 폴더 이름 설정
 firefox_profile_base_path = 'C:\\Users\\pc\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\'
 
 
@@ -37,18 +39,6 @@ def get_current_ip():
         return response.text
     except requests.RequestException:
         return "IP 확인 실패"
-
-
-# Firefox 프로필 생성
-def create_firefox_profile(p_name):
-    command1 = [
-        'C:\\Program Files\\Mozilla Firefox\\firefox.exe',
-        '-no-remote',
-        '-CreateProfile',
-        p_name
-    ]
-    subprocess.run(command1)
-    time.sleep(2)
 
 
 # 각 VPN에 대해 처리
@@ -64,23 +54,49 @@ for vpn_key in vpn.keys():
             print(f"현재 IP: {current_ip}")
             time.sleep(1)  # 연결 후 대기
 
-            # 새로운 프로필 이름 설정
-            profile_name = vpn_key  # VPN 키를 프로필 이름으로 사용
-            create_firefox_profile(profile_name)  # 프로필 생성
+            # 프로필 폴더 찾기
+            source_path = None
+            for folder in os.listdir(firefox_profile_base_path):
+                if folder.endswith('.XX'):  # 폴더 이름이 .XX로 끝나는지 확인
+                    source_path = os.path.join(firefox_profile_base_path, folder)
+                    break
 
-            # Firefox 실행
+            if not source_path:
+                print("복사할 프로필 폴더를 찾을 수 없습니다.")
+                continue
+
+            destination_path = os.path.join(firefox_profile_base_path, vpn_key)
+
+            # 기존 프로필 폴더가 있으면 삭제
+            if os.path.exists(destination_path):
+                shutil.rmtree(destination_path)
+
+            # 폴더 복사
+            shutil.copytree(source_path, destination_path)
+            print(f"{source_path}에서 {vpn_key}로 프로필 복사 완료.")
+            time.sleep(1)  # 복사 후 대기
+
+            # Firefox 종료
+            subprocess.run("taskkill /F /IM firefox.exe", shell=True, stdout=subprocess.DEVNULL,
+                           stderr=subprocess.DEVNULL)
+            print("Firefox 종료 완료.")
+
+            # 프로필 매니저 실행
+            subprocess.Popen(['C:\\Program Files\\Mozilla Firefox\\firefox.exe', '-P', vpn_key])
+            time.sleep(5)  # 프로필 매니저 실행 후 대기
+
+            # Firefox로 URL 열기
             command = [
                 'C:\\Program Files\\Mozilla Firefox\\firefox.exe',
                 '-no-remote',
-                '-P', profile_name,
+                '-P', vpn_key,
                 'https://naver.com'  # 실행할 URL
             ]
             subprocess.Popen(command)
-            time.sleep(5)  # Firefox 실행 후 대기
 
             # 개발자 도구 열기
             pyautogui.hotkey('ctrl', 'shift', 'i')  # 개발자 도구 열기
-            time.sleep(1)
+            time.sleep(1)  # 열리는 시간 대기
 
             # JavaScript 코드 붙여넣기
             js_code = "copy(document.cookie);"
@@ -101,10 +117,10 @@ for vpn_key in vpn.keys():
             except Exception as e:
                 print(f"클립보드 접근 중 오류 발생: {e}")
 
-            # Firefox 종료
+            # Firefox 종료 (출력 억제)
             subprocess.run("taskkill /F /IM firefox.exe", shell=True, stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
-            print(f"{vpn_key} Firefox 종료 완료")
+            print(f"{vpn_key} Firefox 종료완료")
             time.sleep(1)  # 종료 후 대기
 
             # VPN 연결 종료
