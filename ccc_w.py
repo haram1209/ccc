@@ -352,8 +352,8 @@ for _ in range(args.x):
             # NAVER 페이지 로딩 대기
             time.sleep(5)  # 페이지가 로딩될 수 있도록 대기
 
-            # Chrome 종료
-            print(f"{profile} 프로필 Chrome 종료 중...")
+            # whale 종료
+            print(f"{profile} 프로필 whale 종료 중...")
             pyautogui.hotkey('ctrl', 'w')  # 현재 탭 닫기
             time.sleep(5)  # 대기 시간
 
