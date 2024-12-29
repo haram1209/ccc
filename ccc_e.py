@@ -142,7 +142,8 @@ for _ in range(args.x):
             command = [
                 # 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',  # 크롬 실행 파일 경로
                 # 'C:\\Program Files\\Naver\\Naver Whale\\Application\\Whale.exe',  # 웨일
-                'C:\\Program Files(x86)\\Microsoft\\Edge\\Application\\msedge.exe',  # 엣지
+                'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',  # 엣지
+
                 '--user-data-dir=' + profile_path,  # 사용자 데이터 디렉토리
                 'https://search.shopping.naver.com/home'  # 실행할 URL
             ]
