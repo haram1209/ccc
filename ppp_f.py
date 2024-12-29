@@ -71,7 +71,7 @@ for vpn_key in vpn.keys():
             # 파이어폭스 실행
             command = [
                 'C:\\Program Files\\Mozilla Firefox\\firefox.exe',
-                f'-P "{destination_path}"',  # 복사한 프로필 경로 사용
+                '-P', vpn_key,  # 복사한 프로필 이름 사용
                 'https://naver.com'  # 실행할 URL
             ]
             subprocess.Popen(command)
