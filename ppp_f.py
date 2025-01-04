@@ -6,6 +6,8 @@ import pyautogui
 import pyperclip
 import requests
 import argparse
+import configparser
+from io import StringIO
 
 # VPN 정보 로드
 vpn = {}
@@ -13,10 +15,10 @@ file_path = 'C:\\sellylist\\vpn_list.txt'
 with open(file_path, 'r', encoding='utf-8') as file:
     for line in file:
         key, value = line.strip().split(':')
-        vpn[key.strip()] = value.strip()  # 키와 값에 공백이 있을 수 있으므로 제거
+        vpn[key.strip()] = value.strip()
 
 vpn_id = {
-    "1": "95s6199",  # 맨처음구입 로컬에서 돌리던 11개
+    "1": "95s6199",
     "2": "56a7234",
 }
 
@@ -30,6 +32,7 @@ password = "1234"
 
 # Firefox 프로필 경로 및 원본 폴더 이름 설정
 firefox_profile_base_path = 'C:\\Users\\pc\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\'
+profiles_ini_path = os.path.join(firefox_profile_base_path, 'profiles.ini')
 
 
 # 현재 IP 확인 함수
@@ -39,6 +42,28 @@ def get_current_ip():
         return response.text
     except requests.RequestException:
         return "IP 확인 실패"
+
+
+# profiles.ini에 새 프로필 추가 함수
+def add_profile_to_ini(profile_name):
+    config = configparser.ConfigParser()
+
+    # profiles.ini 파일이 존재하면 읽어오기
+    if os.path.exists(profiles_ini_path):
+        config.read(profiles_ini_path)
+
+    # 새로운 프로필 추가
+    new_section = f'Profile{len(config.sections()) + 1}'
+    config[new_section] = {
+        'Name': profile_name,
+        'IsRelative': '1',
+        'Path': profile_name,
+        'Default': '0'
+    }
+
+    # StringIO를 사용하여 메모리에 저장한 후 파일에 쓰기
+    with open(profiles_ini_path, 'w', encoding='utf-8') as configfile:
+        config.write(configfile)
 
 
 # 각 VPN에 대해 처리
@@ -76,25 +101,25 @@ for vpn_key in vpn.keys():
             print(f"{source_path}에서 {vpn_key}로 프로필 복사 완료.")
             time.sleep(1)  # 복사 후 대기
 
+            # profiles.ini에 프로필 추가
+            add_profile_to_ini(vpn_key)
+
             # Firefox 종료
             subprocess.run("taskkill /F /IM firefox.exe", shell=True, stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
             print("Firefox 종료 완료.")
-
-            # 프로필 매니저 실행
-            subprocess.Popen(['C:\\Program Files\\Mozilla Firefox\\firefox.exe', '-P', vpn_key])
-            time.sleep(5)  # 프로필 매니저 실행 후 대기
 
             # Firefox로 URL 열기
             command = [
                 'C:\\Program Files\\Mozilla Firefox\\firefox.exe',
                 '-no-remote',
                 '-P', vpn_key,
-                'https://naver.com'  # 실행할 URL
+                'https://naver.com'
             ]
             subprocess.Popen(command)
 
             # 개발자 도구 열기
+            time.sleep(5)  # Firefox가 완전히 열리도록 대기
             pyautogui.hotkey('ctrl', 'shift', 'i')  # 개발자 도구 열기
             time.sleep(1)  # 열리는 시간 대기
 

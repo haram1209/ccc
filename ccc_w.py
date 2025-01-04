@@ -258,7 +258,7 @@ for _ in range(args.x):
                         time.sleep(1)
                         print(f"{current_time} : {prod_ids[0]} : {random_nm} 못찾음. 다음 상품으로 진행합니다.")
                         # pyautogui.hotkey('ctrl', 'shift', 'j')
-                        time.sleep(1)
+                        time.sleep(8)  # 못찾았으니 8초 쉼
                         break  # 다음 상품으로 넘어가기 위해 루프 종료
 
                     # 카탈로그일때 때 새 탭에서 개발자 도구 열기

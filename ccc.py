@@ -141,6 +141,7 @@ for _ in range(args.x):
             # profile_path = f'C:\\Users\\hanju\\AppData\\Local\\Microsoft\\Edge\\{profile}'  # 엣지 엣지일 경우 개발자도구 포커스 맞추기 켜야함
             command = [
                 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',  # 크롬 실행 파일 경로
+                # 'C:\\Program Files\\Naver\\Naver Whale\\Application\\Whale.exe',  # 웨일
                 '--user-data-dir=' + profile_path,  # 사용자 데이터 디렉토리
                 'https://search.shopping.naver.com/home'  # 실행할 URL
             ]
@@ -257,7 +258,7 @@ for _ in range(args.x):
                         time.sleep(1)
                         print(f"{current_time} : {prod_ids[0]} : {random_nm} 못찾음. 다음 상품으로 진행합니다.")
                         # pyautogui.hotkey('ctrl', 'shift', 'j')
-                        time.sleep(1)
+                        time.sleep(8)  # 못찾았으니 8초 쉼
                         break  # 다음 상품으로 넘어가기 위해 루프 종료
 
                     # 카탈로그일때 때 새 탭에서 개발자 도구 열기
@@ -317,7 +318,7 @@ for _ in range(args.x):
                         else:
                             time.sleep(1)
                             print(f"{current_time} : 카탈로그 : {prod_ids[1]} : {random_nm} 못찾음. 다음 상품으로 진행합니다.")
-                            # pyautogui.hotkey('ctrl', 'shift', 'j')
+                            pyautogui.hotkey('ctrl', 'w')
                             time.sleep(1)
                             break  # 다음 상품으로 넘어가기 위해 루프 종료
 
